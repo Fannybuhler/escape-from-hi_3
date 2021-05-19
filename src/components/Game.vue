@@ -5,9 +5,9 @@
         <h1>Get three in a row</h1>
       </div>
 
-      <Board :squares="squares" :winner="winner" @click="click" />
+      <Board />
 
-      <div class="game-info">
+      <!-- <div class="game-info">
         <p v-if="stepNumber === 0">
           It's your turn&nbsp;<b :class="currentPlayer">{{ currentPlayer }}</b>!
         </p>
@@ -24,60 +24,61 @@
           It's&nbsp;
           <b :class="currentPlayer">{{ currentPlayer }}</b>!&nbsp;turn.
         </p>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 import Board from './Board'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Game',
   components: {
     Board
   },
-  data () {
-    return {
-      squares: Array(9).fill(null),
-      stepNumber: 0,
-      currentPlayer: 'X',
-      winner: null
-    }
+ 
+  computed: {
+    ...mapGetters({
+
+    })
   },
   methods: {
-    hasWinner() {
-      if (this.winner) return true
-      const squares = this.squares
-      const matches = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7],
-        [2, 5, 8], [0, 4, 8], [2, 4, 6]
-      ]
-      for (let i = 0; i < matches.length; i++) {
-        const [a, b, c] = matches[i]
-        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-          this.winner = [ a, b, c ]
-          return true
-        }
-      }
-      return false
-    },
-    restart() {
-      this.squares = Array(9).fill(null)
-      this.stepNumber = 0
-      this.currentPlayer = 'X'
-      this.winner = null
-    },
-    click (i) {
-      if (this.squares[i] || this.winner) return
-      
+    // hasWinner() {
+    //   if (this.winner) return true
+    //   const squares = this.squares
+    //   const matches = [
+    //     [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7],
+    //     [2, 5, 8], [0, 4, 8], [2, 4, 6]
+    //   ]
+    //   for (let i = 0; i < matches.length; i++) {
+    //     const [a, b, c] = matches[i]
+    //     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+    //       this.winner = [ a, b, c ]
+    //       return true
+    //     }
+    //   }
+    //   return false
+    // },
+    // restart() {
+    //   this.squares = Array(9).fill(null)
+    //   this.stepNumber = 0
+    //   this.currentPlayer = 'X'
+    //   this.winner = null
+    // },
+    //click () {
+      // if (this.squares[i] || this.winner) return
       // this.$set(this.squares, i, this.currentPlayer)
       
-      if (!this.hasWinner()) {
-        this.stepNumber++
-        this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X'
-      }
-    }
+      // this.stepNumber++
+      // this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X'
+
+      // if (!this.hasWinner()) {
+      //   this.stepNumber++
+      //   this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X'
+      // }
+    //}
   }
 }
 </script>

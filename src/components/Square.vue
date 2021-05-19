@@ -1,20 +1,26 @@
 <template>
-  <button class="square" :class="[ value, { 'winner': winner } ]"
-    :disabled="disabled" @click="handleClick">{{value}}</button>
+  <button class="square" @click="handleClick"></button>
 </template>
 
 <script>
+import { mapGetters} from 'vuex'
+
 export default {
   name: 'Square',
   props: {
-    value: String,
-    winner: Boolean,
-    disabled: Boolean
+    position: Number,
   },
+
+  computed: {
+    ...mapGetters({
+      currentPlayer: 'getCurrentPlayer',
+    })
+  },
+
   methods: {
     handleClick () {
-      console.log('Square: click')
-      this.$emit('squareClick')
+      console.log('square position: ', this.position)
+      this.$store.dispatch('clickedSquare', this.position)
     }
   }
 }
