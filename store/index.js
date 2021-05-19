@@ -5,16 +5,12 @@ export default createStore({
     squares: Array(9).fill(null),
     stepNumber: 0,
     currentPlayer: 'X',
-    // winner: null,
-    clickedSquares: []
   },
 
   getters: {
     getSquares: state => state.squares,
     getStepNumber: state => state.stepNumber,
     getCurrentPlayer: state => state.currentPlayer,
-    // getWinner: state => state.winner,
-    getClickedSquares: state => state.clickedSquares,
   },
 
   actions: {
@@ -24,6 +20,10 @@ export default createStore({
 
     flipCurrentPlayer(context) {
       context.commit('setCurrentPlayer')
+    },
+
+    resetSquares(context) {
+      context.commit('resetSquares')
     }
   },
 
@@ -36,6 +36,10 @@ export default createStore({
     setCurrentPlayer(state) {
       state.currentPlayer = state.currentPlayer === 'X' ? 'O' : 'X'
       console.log('current player is: ', state.currentPlayer)
+    },
+
+    resetSquares(state) {
+      state.squares = Array(9).fill(null)
     }
   }
 })

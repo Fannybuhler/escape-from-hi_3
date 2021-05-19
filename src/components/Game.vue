@@ -7,8 +7,12 @@
 
       <Board />
 
-      <!-- <div class="game-info">
-        <p v-if="stepNumber === 0">
+      <div class="game-info">
+        <div v-if="winner">
+          <p>{{ winner ? `The winner is ${winner}!` : '' }}</p>
+          <button @click="restart">Play again</button>
+        </div>
+        <!-- <p v-if="stepNumber === 0">
           It's your turn&nbsp;<b :class="currentPlayer">{{ currentPlayer }}</b>!
         </p>
         <p v-else-if="!!winner">
@@ -23,8 +27,8 @@
         <p v-else>
           It's&nbsp;
           <b :class="currentPlayer">{{ currentPlayer }}</b>!&nbsp;turn.
-        </p>
-      </div> -->
+        </p> -->
+      </div>
     </div>
   </div>
 </template>
@@ -40,33 +44,43 @@ export default {
   },
  
   computed: {
-    ...mapGetters({
+    winner: function() {
+      return this.calculateWinner(this.squares)
+    },
 
+    ...mapGetters({
+      squares: 'getSquares',
+      currentPlayer : 'getCurrentPlayer'
     })
   },
+
   methods: {
-    // hasWinner() {
-    //   if (this.winner) return true
-    //   const squares = this.squares
-    //   const matches = [
-    //     [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7],
-    //     [2, 5, 8], [0, 4, 8], [2, 4, 6]
-    //   ]
-    //   for (let i = 0; i < matches.length; i++) {
-    //     const [a, b, c] = matches[i]
-    //     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-    //       this.winner = [ a, b, c ]
-    //       return true
-    //     }
-    //   }
-    //   return false
-    // },
-    // restart() {
-    //   this.squares = Array(9).fill(null)
-    //   this.stepNumber = 0
-    //   this.currentPlayer = 'X'
-    //   this.winner = null
-    // },
+    calculateWinner(squares) {
+      const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ];
+      for (let line of lines) {
+        const [a, b, c] = line;
+        
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+          return squares[a];
+        }
+      }
+      return null;
+    },
+
+    restart() {
+      this.$store.dispatch('resetSquares')
+      this.$store.dispatch('flipCurrentPlayer')
+      this.winner = null
+    },
     //click () {
       // if (this.squares[i] || this.winner) return
       // this.$set(this.squares, i, this.currentPlayer)
@@ -148,7 +162,7 @@ export default {
   font-weight: 600;
   font-size: .75em;
   padding: .5rem 1rem;
-  margin: -.5rem 0 -.5rem 1rem;
+  margin-top: .5rem;
   border: 2px solid #fff;
   background: #fff5;
   text-shadow: 0 0 1px #fff, 0 2px 5px #fff5;

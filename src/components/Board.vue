@@ -1,8 +1,7 @@
 <template>
   <div class="board">
-    <Square v-for="(square, position) in squares" :key="square"
+    <Square v-for="(square, position) in squares" :key="position"
       :position="position"
-      @click="flipCurrentPlayer"
     />
   </div>
 </template>
@@ -13,16 +12,10 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Board',
-  props: {
-    // currentPlayer: String
-  },
-
   computed: {
     ...mapGetters({
       squares: 'getSquares',
-      // currentPlayer: 'getCurrentPlayer',
-      // clickedSquares: 'getClickedSquares',
-    })
+    }),
   },
 
   components: {
@@ -30,9 +23,7 @@ export default {
   },
 
   methods: {
-    flipCurrentPlayer() {
-      this.$store.dispatch('flipCurrentPlayer')
-    }
+    
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <button class="square" @click="handleClick"></button>
+  <button class="square" @click="handleClick">{{ value }}</button>
 </template>
 
 <script>
@@ -11,16 +11,39 @@ export default {
     position: Number,
   },
 
+  data() {
+    return {
+      value: null
+    }
+  },
+
   computed: {
     ...mapGetters({
+      square: 'getSquares',
       currentPlayer: 'getCurrentPlayer',
     })
   },
 
   methods: {
     handleClick () {
-      console.log('square position: ', this.position)
+      this.fillSquare()
+    },
+
+    fillSquare() {
+      const squareValue = this.square[this.position]
+
+      if (squareValue === null) {
+        this.value = this.currentPlayer
+        this.dispatchers()
+      } else {
+        console.log('block this move')
+        return
+      }
+    },
+
+    dispatchers() {
       this.$store.dispatch('clickedSquare', this.position)
+      this.$store.dispatch('flipCurrentPlayer')
     }
   }
 }
