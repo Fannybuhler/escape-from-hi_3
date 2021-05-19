@@ -1,7 +1,7 @@
 <template>
   <div class="board">
-    <Square v-for="index in squares.length" :key="index"
-      :position="index"
+    <Square v-for="(square, position) in squares" :key="square"
+      :position="position"
       @click="flipCurrentPlayer"
     />
   </div>
