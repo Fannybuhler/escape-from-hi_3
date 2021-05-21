@@ -21,10 +21,6 @@ export default {
   components: {
     Square
   },
-
-  methods: {
-    
-  }
 }
 </script>
 

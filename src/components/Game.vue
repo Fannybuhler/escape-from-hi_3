@@ -8,26 +8,12 @@
       <Board />
 
       <div class="game-info">
-        <div v-if="winner">
-          <p>{{ winner ? `The winner is ${winner}!` : '' }}</p>
-          <button @click="restart">Play again</button>
+        <div>
+          <p v-if="winner">{{ winner ? `The winner is ${winner}!` : '' }}</p>
+          <p v-if="stepNumber > 9">It's a draw!</p>
+          <button v-if="winner || stepNumber > 9" 
+            @click="restart">Play again</button>
         </div>
-        <!-- <p v-if="stepNumber === 0">
-          It's your turn&nbsp;<b :class="currentPlayer">{{ currentPlayer }}</b>!
-        </p>
-        <p v-else-if="!!winner">
-          The winner is:&nbsp;
-          <b :class="currentPlayer">{{ currentPlayer }}</b>!&nbsp;
-          <button @click="restart">Play again</button>
-        </p>
-        <p v-else-if="stepNumber > 8">
-          Last move!&nbsp;
-          <button @click="restart">Play again</button>
-        </p>
-        <p v-else>
-          It's&nbsp;
-          <b :class="currentPlayer">{{ currentPlayer }}</b>!&nbsp;turn.
-        </p> -->
       </div>
     </div>
   </div>
@@ -44,55 +30,16 @@ export default {
   },
  
   computed: {
-    winner: function() {
-      return this.calculateWinner(this.squares)
-    },
-
     ...mapGetters({
-      squares: 'getSquares',
-      currentPlayer : 'getCurrentPlayer'
+      winner: 'getWinner',
+      stepNumber: 'getStepNumber'
     })
   },
 
   methods: {
-    calculateWinner(squares) {
-      const lines = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-      ];
-      for (let line of lines) {
-        const [a, b, c] = line;
-        
-        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-          return squares[a];
-        }
-      }
-      return null;
-    },
-
     restart() {
-      this.$store.dispatch('resetSquares')
-      this.$store.dispatch('flipCurrentPlayer')
-      this.winner = null
+      location.reload()
     },
-    //click () {
-      // if (this.squares[i] || this.winner) return
-      // this.$set(this.squares, i, this.currentPlayer)
-      
-      // this.stepNumber++
-      // this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X'
-
-      // if (!this.hasWinner()) {
-      //   this.stepNumber++
-      //   this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X'
-      // }
-    //}
   }
 }
 </script>

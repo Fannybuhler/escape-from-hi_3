@@ -21,6 +21,8 @@ export default {
     ...mapGetters({
       square: 'getSquares',
       currentPlayer: 'getCurrentPlayer',
+      stepNumber: 'getStepNumber',
+      winner: 'getWinner'
     })
   },
 
@@ -32,17 +34,21 @@ export default {
     fillSquare() {
       const squareValue = this.square[this.position]
 
+      if(this.winner) {
+        return
+      }
+
       if (squareValue === null) {
         this.value = this.currentPlayer
         this.dispatchers()
-      } else {
-        console.log('block this move')
-        return
       }
+      return
     },
 
     dispatchers() {
       this.$store.dispatch('clickedSquare', this.position)
+      this.$store.dispatch('increaseStepNumber')
+      this.$store.dispatch('calculateWinner')
       this.$store.dispatch('flipCurrentPlayer')
     }
   }
