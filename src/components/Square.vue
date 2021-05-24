@@ -1,5 +1,5 @@
 <template>
-  <button class="square" @click="handleClick">{{ value }}</button>
+  <button class="square" @click="fillSquare">{{ value }}</button>
 </template>
 
 <script>
@@ -27,10 +27,6 @@ export default {
   },
 
   methods: {
-    handleClick () {
-      this.fillSquare()
-    },
-
     fillSquare() {
       const squareValue = this.square[this.position]
 
