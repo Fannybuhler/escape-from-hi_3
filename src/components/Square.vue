@@ -14,7 +14,6 @@ export default {
   data() {
     return {
       value: null,
-      test: this.opponentMove()
     }
   },
 
@@ -27,12 +26,13 @@ export default {
     }),
   },
 
-  // mounted() {
-  //   this.opponentMove()
-  // },
+  mounted() {
+    this.opponentMove()
+  },
 
   methods: {
     fillSquare() {
+      this.opponentMove()
       const squareValue = this.square[this.position]
 
       if(this.winner) {
@@ -47,9 +47,10 @@ export default {
     },
 
     opponentMove() {
-      for (let i = 0; i < 9; i++) {
+      for (let i = 0; i < this.square.length; i++) {
         console.log('index', i)
       }
+        console.log('---------')
     }, 
 
     dispatchers() {
