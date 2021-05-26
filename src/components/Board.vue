@@ -1,5 +1,5 @@
 <template>
-  <div class="board">
+  <div class="board" :class="{rotate : isStarted}">
     <Square v-for="(square, position) in squares" :key="position"
       :position="position"
     />
@@ -8,14 +8,15 @@
 
 <script>
 import Square from './Square'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Board',
   computed: {
-    ...mapGetters({
-      squares: 'getSquares',
-    }),
+    ...mapState([
+      'squares',
+      'isStarted'
+    ]),
   },
 
   components: {
@@ -29,8 +30,8 @@ export default {
   border: 1rem solid #fff4;
   box-shadow: 2.5px 5px 25px #0004, 0 1px 6px #0006;
   border-radius: .5rem;
-  width: 65vmin;
-  height: 65vmin;
+  width: 55vmin;
+  height: 55vmin;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: repeat(3, 1fr);
@@ -38,9 +39,17 @@ export default {
   background-blend-mode: exclusion;
   background-image: var(--noise-pattern);
 }
-.board-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
+
+.rotate {
+  animation-duration: 5s;
+  animation-name: spin;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 </style>

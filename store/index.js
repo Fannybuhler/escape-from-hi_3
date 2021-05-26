@@ -2,17 +2,18 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    isStarted: false,
     squares: Array(9).fill(null),
     currentPlayer: 'X',
     winner: null,
-    stepNumber: 1
+    stepNumber: 1,
   },
 
   getters: {
     getSquares: state => state.squares,
     getCurrentPlayer: state => state.currentPlayer,
     getStepNumber: state => state.stepNumber,
-    getWinner: state => state.winner
+    getWinner: state => state.winner,
   },
 
   actions: {
@@ -78,6 +79,10 @@ export default createStore({
 
     setStepNumber(state) {
       state.stepNumber += 1
+    },
+
+    toggleIsStarted(state) {
+      state.isStarted = !state.isStarted
     }
   }
 })

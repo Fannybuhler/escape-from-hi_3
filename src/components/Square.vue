@@ -13,7 +13,8 @@ export default {
 
   data() {
     return {
-      value: null
+      value: null,
+      test: this.opponentMove()
     }
   },
 
@@ -23,8 +24,12 @@ export default {
       currentPlayer: 'getCurrentPlayer',
       stepNumber: 'getStepNumber',
       winner: 'getWinner'
-    })
+    }),
   },
+
+  // mounted() {
+  //   this.opponentMove()
+  // },
 
   methods: {
     fillSquare() {
@@ -40,6 +45,12 @@ export default {
       }
       return
     },
+
+    opponentMove() {
+      for (let i = 0; i < 9; i++) {
+        console.log('index', i)
+      }
+    }, 
 
     dispatchers() {
       this.$store.dispatch('clickedSquare', this.position)

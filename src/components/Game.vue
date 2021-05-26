@@ -1,13 +1,14 @@
 <template>
   <div class="game">
     <div class="game-area">
-      <div class="game-title">
-        <h1>Get three in a row</h1>
-      </div>
+      <button v-if="isStarted === false" 
+      @click="startGame" 
+      :class="{hidden : isStarted}"
+      class="startButton"
+      >START</button>
+      <Board disabled="disabled"/>
 
-      <Board />
-
-      <div class="game-info">
+      <div class="game-info" v-if="winner || stepNumber > 9">
         <div>
           <p v-if="winner">{{ winner ? `The winner is ${winner}!` : '' }}</p>
           <p v-if="stepNumber > 9">It's a draw!</p>
@@ -21,7 +22,7 @@
 
 <script>
 import Board from './Board'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Game',
@@ -30,13 +31,18 @@ export default {
   },
  
   computed: {
-    ...mapGetters({
-      winner: 'getWinner',
-      stepNumber: 'getStepNumber'
-    })
+    ...mapState([
+      'isStarted',
+      'winner',
+      'stepNumber'
+    ])
   },
 
   methods: {
+    startGame() {
+      this.$store.commit('toggleIsStarted')
+    },
+
     restart() {
       location.reload()
     },
@@ -45,9 +51,26 @@ export default {
 </script>
 
 <style scoped>
+.startButton {
+  position: absolute;
+  height: 50px;
+  width: 70px;
+
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  
+  z-index: 1;
+}
+
+.hidden {
+  display: none;
+}
+
 .game {
   background-color: rgba(var(--gradient-color-base));
-  background-image: repeating-linear-gradient(45deg, #0000 5px, rgba(var(--gradient-color-1), .2) 5px, rgba(var(--gradient-color-1), .2) 10px, rgba(var(--gradient-color-2), 0) 10px, rgba(var(--gradient-color-2), 0) 35px, rgba(var(--gradient-color-2), .4) 35px, rgba(var(--gradient-color-2), .4) 40px,rgba(var(--gradient-color-1), .2) 40px, rgba(var(--gradient-color-1), .2) 50px, rgba(10, 36, 45, 0) 50px, rgba(var(--gradient-color-1), 0) 60px,rgba(var(--gradient-color-2), .4) 60px, rgba(var(--gradient-color-2), .4) 70px, rgba(var(--gradient-color-3), .3) 70px, rgba(var(--gradient-color-3), .3) 80px,rgba(var(--gradient-color-3), 0) 80px, rgba(var(--gradient-color-3), 0) 90px, rgba(var(--gradient-color-2), .4) 90px, rgba(var(--gradient-color-2), .4) 110px,rgba(var(--gradient-color-2), 0) 110px, rgba(var(--gradient-color-2), 0) 120px, rgba(var(--gradient-color-1), .2) 120px, rgba(var(--gradient-color-1), .2) 140px), repeating-linear-gradient(135deg, #0000 5px, rgba(var(--gradient-color-1), .2) 5px, rgba(var(--gradient-color-1), .2) 10px,rgba(var(--gradient-color-2), 0) 10px, rgba(var(--gradient-color-2), 0) 35px, rgba(var(--gradient-color-2), .4) 35px, rgba(var(--gradient-color-2), .4) 40px,rgba(var(--gradient-color-1), .2) 40px, rgba(var(--gradient-color-1), .2) 50px, rgba(var(--gradient-color-1), 0) 50px, rgba(var(--gradient-color-1), 0) 60px,rgba(var(--gradient-color-2), .4) 60px, rgba(var(--gradient-color-2), .4) 70px, rgba(var(--gradient-color-3), .3) 70px, rgba(var(--gradient-color-3), .3) 80px,rgba(var(--gradient-color-3), 0) 80px, rgba(var(--gradient-color-3), 0) 90px, rgba(var(--gradient-color-2), .4) 90px, rgba(var(--gradient-color-2), .4) 110px,rgba(var(--gradient-color-2), 0) 110px, rgba(var(--gradient-color-2), 0) 140px, rgba(var(--gradient-color-1), .2) 140px, rgba(var(--gradient-color-1), .2) 160px);
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -57,23 +80,7 @@ export default {
   display: flex;
   flex-flow: column;
 }
-.game-title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0 3vmin;
-}
-.game-title img {
-  margin: 0 12px 0 -20px;
-  width: 40px;
-  filter: drop-shadow(-1px 1px 0 #0007) drop-shadow(1px -1px 0 #0007) drop-shadow(1px 1px 0 #0007);
-}
-.game-title h1 {
-  margin: 0;
-  font-size: 2.25em;
-  color: rgba(var(--theme-color));
-  text-shadow: -1px -1px 1px #000b, -1px 1px 1px #000b, 1px -1px 1px #000b, 1px 1px 1px #000b;
-}
+
 .game-info {
   margin: 3vmin 0 0;
   padding: 1rem .5rem;
@@ -85,7 +92,6 @@ export default {
   backdrop-filter: blur(10px);
   background: #fff6;
   background-blend-mode: exclusion;
-  background-image: var(--noise-pattern);
   color: #111;
 }
 .game-info p {

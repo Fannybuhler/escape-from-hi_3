@@ -1,18 +1,15 @@
 <template>
   <div>
-    <AppHeader />
     <Game />
   </div>
 </template>
 
 <script>
-import AppHeader from './components/AppHeader'
 import Game from './components/Game'
 
 export default {
   name: 'App',
   components: {
-    AppHeader,
     Game
   }
 }
@@ -25,7 +22,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 :root {
