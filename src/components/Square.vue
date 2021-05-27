@@ -32,7 +32,6 @@ export default {
 
   methods: {
     fillSquare() {
-      this.opponentMove()
       const squareValue = this.square[this.position]
 
       if(this.winner) {
@@ -41,20 +40,62 @@ export default {
 
       if (squareValue === null) {
         this.value = this.currentPlayer
+        this.$store.dispatch('clickedSquare', this.position)
         this.dispatchers()
       }
+
+      // if(this.currentPlayer === 'O') {
+      //   this.opponentMove()
+      // }
       return
     },
 
-    opponentMove() {
-      for (let i = 0; i < this.square.length; i++) {
-        console.log('index', i)
+    // opponentMove() {
+    //   let arr = this.square
+    //   let arr_null = []
+    //   let null_counter = 0
+
+    //   if (this.currentPlayer === 'O') {
+    //     for(let i = 0; i < arr.length; i++) {
+    //       const val = arr[i]
+    //       if (val === null) {
+    //         arr_null[null_counter] = i
+    //         null_counter++
+    //       }
+    //     }
+    //     console.log('store array: ', arr)
+    //     console.log('null array: ', arr_null)
+    //     arr_null = arr_null.sort(() => Math.random() - 0.5)
+
+    //     this.pushOpponentMove(arr)
+
+    //   }
+    // },
+
+        // let index = Math.floor(Math.random() * arr.length)
+        // while (arr[index] !== null) {
+        //   index = Math.floor(Math.random() * arr.length)
+        //   console.log('Picked random index: ', index)
+          
+        //   if (arr[index] === null) {
+        //     this.value = this.currentPlayer
+        //     console.log('value: ', this.value)
+        //     this.$store.dispatch('clickedSquare', index)
+        //     this.dispatchers()
+        //     return
+        //   } 
+
+    /* 
+      IF (player turn === 'O') {
+        Loop over Array and look for null values
+        Get index of null values
+        Randomly pick one of the indexes
+        Place O
       }
-        console.log('---------')
-    }, 
+      
+    */
 
     dispatchers() {
-      this.$store.dispatch('clickedSquare', this.position)
       this.$store.dispatch('increaseStepNumber')
       this.$store.dispatch('calculateWinner')
       this.$store.dispatch('flipCurrentPlayer')
