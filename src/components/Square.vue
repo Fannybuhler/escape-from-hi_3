@@ -1,5 +1,5 @@
 <template>
-  <button class="square" @click="fillSquare">{{ value }}</button>
+  <button class="square" @click="fillSquare">{{ value2 }}</button>
 </template>
 
 <script>
@@ -9,30 +9,28 @@ export default {
   name: 'Square',
   props: {
     position: Number,
+    value2: String
   },
 
   data() {
     return {
       value: null,
+      
     }
   },
 
   computed: {
     ...mapGetters({
-      square: 'getSquares',
+      squares: 'getSquares',
       currentPlayer: 'getCurrentPlayer',
       stepNumber: 'getStepNumber',
       winner: 'getWinner'
     }),
   },
 
-  mounted() {
-    this.opponentMove()
-  },
-
   methods: {
     fillSquare() {
-      const squareValue = this.square[this.position]
+      const squareValue = this.squares[this.position]
 
       if(this.winner) {
         return
@@ -44,57 +42,25 @@ export default {
         this.dispatchers()
       }
 
-      // if(this.currentPlayer === 'O') {
-      //   this.opponentMove()
-      // }
+      this.opponentMove()
       return
     },
 
-    // opponentMove() {
-    //   let arr = this.square
-    //   let arr_null = []
-    //   let null_counter = 0
-
-    //   if (this.currentPlayer === 'O') {
-    //     for(let i = 0; i < arr.length; i++) {
-    //       const val = arr[i]
-    //       if (val === null) {
-    //         arr_null[null_counter] = i
-    //         null_counter++
-    //       }
-    //     }
-    //     console.log('store array: ', arr)
-    //     console.log('null array: ', arr_null)
-    //     arr_null = arr_null.sort(() => Math.random() - 0.5)
-
-    //     this.pushOpponentMove(arr)
-
-    //   }
-    // },
-
-        // let index = Math.floor(Math.random() * arr.length)
-        // while (arr[index] !== null) {
-        //   index = Math.floor(Math.random() * arr.length)
-        //   console.log('Picked random index: ', index)
-          
-        //   if (arr[index] === null) {
-        //     this.value = this.currentPlayer
-        //     console.log('value: ', this.value)
-        //     this.$store.dispatch('clickedSquare', index)
-        //     this.dispatchers()
-        //     return
-        //   } 
-
-    /* 
-      IF (player turn === 'O') {
-        Loop over Array and look for null values
-        Get index of null values
-        Randomly pick one of the indexes
-        Place O
+    opponentMove() {
+      let arr = this.squares
+      let index = Math.floor(Math.random() * arr.length)
+      while ((arr[index] === 'X') || (arr[index] === 'O')) {
+        index = Math.floor(Math.random() * arr.length)
+        console.log('Picked random index: ', index)
+        if(this.winner || this.stepNumber > 8) {
+          return
+        }
       }
-      
-    */
-
+      this.$store.dispatch('clickedSquare', index)
+      this.dispatchers()
+      console.log('filled index: ', index, 'with O')
+    },
+ 
     dispatchers() {
       this.$store.dispatch('increaseStepNumber')
       this.$store.dispatch('calculateWinner')
@@ -130,11 +96,5 @@ export default {
 }
 .square:not([disabled]):empty:active {
   box-shadow: inset 0 2px 50px #0008;
-}
-.square.X {
-  color: #ff5722;
-}
-.square.O {
-  color: #ffeb3b;
 }
 </style>

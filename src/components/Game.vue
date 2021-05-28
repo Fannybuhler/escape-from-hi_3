@@ -11,7 +11,7 @@
       <div class="game-info" v-if="winner || stepNumber > 9">
         <div>
           <p v-if="winner">{{ winner ? `The winner is ${winner}!` : '' }}</p>
-          <p v-if="stepNumber > 9">It's a draw!</p>
+          <p v-if="winner === null && stepNumber > 9">It's a draw!</p>
           <button v-if="winner || stepNumber > 9" 
             @click="restart">Play again</button>
         </div>
