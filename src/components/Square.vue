@@ -1,49 +1,46 @@
 <template>
-  <button class="square" @click="fillSquare">{{ value2 }}</button>
+  <button class="square" @click="fillSquare">{{ value }}</button>
 </template>
 
 <script>
-import { mapGetters} from 'vuex'
+import { mapGetters, mapState} from 'vuex'
 
 export default {
   name: 'Square',
   props: {
     position: Number,
-    value2: String
-  },
-
-  data() {
-    return {
-      value: null,
-      
-    }
+    value: String
   },
 
   computed: {
+    ...mapState([
+      'isStarted'
+    ]),
     ...mapGetters({
       squares: 'getSquares',
       currentPlayer: 'getCurrentPlayer',
       stepNumber: 'getStepNumber',
-      winner: 'getWinner'
+      winner: 'getWinner',
     }),
   },
 
   methods: {
     fillSquare() {
-      const squareValue = this.squares[this.position]
+      if(this.isStarted && this.currentPlayer === 'X') {
+        const squareValue = this.squares[this.position]
 
-      if(this.winner) {
+        if(this.winner) {
+          return
+        }
+
+        if (squareValue === null) {
+          this.$store.dispatch('clickedSquare', this.position)
+          this.dispatchers()
+        }
+
+        this.opponentMove()
         return
       }
-
-      if (squareValue === null) {
-        this.value = this.currentPlayer
-        this.$store.dispatch('clickedSquare', this.position)
-        this.dispatchers()
-      }
-
-      this.opponentMove()
-      return
     },
 
     opponentMove() {

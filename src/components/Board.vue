@@ -1,7 +1,7 @@
 <template>
   <div class="board" :class="{rotate : isStarted}">
     <Square v-for="(square, position) in squares" :key="position"
-      :position="position" :value2="square"
+      :position="position" :value="square"
     />
   </div>
 </template>
