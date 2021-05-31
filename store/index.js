@@ -51,6 +51,7 @@ export default createStore({
         
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
           commit('saveWinner', squares[a])
+          commit('toggleIsStarted')
         }
       }
     }

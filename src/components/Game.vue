@@ -1,19 +1,19 @@
 <template>
   <div class="game">
     <div class="game-area">
-      <button v-if="isStarted === false" 
-      @click="startGame" 
-      :class="{hidden : isStarted}"
-      class="startButton"
-      >START</button>
-      <Board disabled="disabled"/>
+      <Board />
 
-      <div class="game-info" v-if="winner || stepNumber > 9">
+      <div class="game-info" v-if="winner || stepNumber > 9 || isStarted === false">
         <div>
           <p v-if="winner">{{ winner ? `The winner is ${winner}!` : '' }}</p>
           <p v-if="winner === null && stepNumber > 9">It's a draw!</p>
           <button v-if="winner || stepNumber > 9" 
-            @click="restart">Play again</button>
+            @click="restart">Play again
+          </button>
+          <button v-if="isStarted === false && winner === null" 
+            @click="startGame" 
+            :class="{hidden : isStarted}">START
+          </button>
         </div>
       </div>
     </div>
@@ -51,20 +51,6 @@ export default {
 </script>
 
 <style scoped>
-.startButton {
-  position: absolute;
-  height: 50px;
-  width: 70px;
-
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  
-  z-index: 1;
-}
-
 .hidden {
   display: none;
 }
