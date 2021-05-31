@@ -51,12 +51,12 @@ export default {
   animation-duration: 5s;
   animation-name: spin;
   animation-iteration-count: infinite;
-} */
+}
 
 @keyframes spin {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
-}
+} */
 </style>

@@ -27,8 +27,9 @@ export default {
   methods: {
     fillSquare() {
       if(this.isStarted && this.currentPlayer === 'X') {
-        let reverseIndex = this.reverseIndex(this.position)
+        const reverseIndex = this.reverseIndex(this.position)
         const squareValue = this.squares[reverseIndex]
+        console.log('squareValue: ', squareValue)
         
         if(this.winner) {
           return
@@ -37,10 +38,10 @@ export default {
         if (squareValue === null) {
           this.$store.dispatch('clickedSquare', reverseIndex)
           this.dispatchers()
+          this.opponentMove()
+        } else {
+          return
         }
-
-        this.opponentMove()
-        return
       }
     },
 
@@ -48,22 +49,40 @@ export default {
       let reverseIndex = null
       if (index === 0) {
         reverseIndex = 8
+        console.log('recieved index: ', index)
+        console.log('reversed to: ', reverseIndex)
       } else if (index === 1) {
         reverseIndex = 7
+        console.log('recieved index: ', index)
+        console.log('reversed to: ', reverseIndex)
       } else if (index === 2) {
         reverseIndex = 6
+        console.log('recieved index: ', index)
+        console.log('reversed to: ', reverseIndex)
       } else if (index === 3) {
         reverseIndex = 5
+        console.log('recieved index: ', index)
+        console.log('reversed to: ', reverseIndex)
       } else if (index === 4) {
         reverseIndex = 4
+        console.log('recieved index: ', index)
+        console.log('reversed to: ', reverseIndex)
       } else if (index === 5) {
         reverseIndex = 3
+        console.log('recieved index: ', index)
+        console.log('reversed to: ', reverseIndex)
       } else if (index === 6) {
         reverseIndex = 2
+        console.log('recieved index: ', index)
+        console.log('reversed to: ', reverseIndex)
       } else if (index === 7) {
         reverseIndex = 1
+        console.log('recieved index: ', index)
+        console.log('reversed to: ', reverseIndex)
       } else if (index === 8) {
         reverseIndex = 0
+        console.log('recieved index: ', index)
+        console.log('reversed to: ', reverseIndex)
       }
       return reverseIndex
     },
