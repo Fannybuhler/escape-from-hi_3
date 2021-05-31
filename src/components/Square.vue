@@ -111,7 +111,8 @@ export default {
 
 <style scoped>
 .square {
-  background: #fff9;
+  color: #F42FDA;
+  background: #ffffff14;
   background-blend-mode: exclusion;
   background-image: var(--noise-pattern);
   border: 1px solid #fffc;
@@ -121,7 +122,7 @@ export default {
   padding: 0;
   text-align: center;
   box-shadow: inset 0 0 0 #0004;
-  text-shadow: -1px -1px 1px #000b, -1px 1px 1px #000b, 1px -1px 1px #000b, 1px 1px 1px #000b;
+  /* text-shadow: -1px -1px 1px #CC0364, -1px 1px 1px #CC0364, 1px -1px 1px #CC0364, 1px 1px 1px #CC0364; */
   transition: all .25s ease;
   outline: none;
 }
