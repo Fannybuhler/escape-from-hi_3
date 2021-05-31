@@ -27,14 +27,15 @@ export default {
   methods: {
     fillSquare() {
       if(this.isStarted && this.currentPlayer === 'X') {
-        const squareValue = this.squares[this.position]
-
+        let reverseIndex = this.reverseIndex(this.position)
+        const squareValue = this.squares[reverseIndex]
+        
         if(this.winner) {
           return
         }
 
         if (squareValue === null) {
-          this.$store.dispatch('clickedSquare', this.position)
+          this.$store.dispatch('clickedSquare', reverseIndex)
           this.dispatchers()
         }
 
@@ -43,19 +44,41 @@ export default {
       }
     },
 
+    reverseIndex(index) {
+      let reverseIndex = null
+      if (index === 0) {
+        reverseIndex = 8
+      } else if (index === 1) {
+        reverseIndex = 7
+      } else if (index === 2) {
+        reverseIndex = 6
+      } else if (index === 3) {
+        reverseIndex = 5
+      } else if (index === 4) {
+        reverseIndex = 4
+      } else if (index === 5) {
+        reverseIndex = 3
+      } else if (index === 6) {
+        reverseIndex = 2
+      } else if (index === 7) {
+        reverseIndex = 1
+      } else if (index === 8) {
+        reverseIndex = 0
+      }
+      return reverseIndex
+    },
+
     opponentMove() {
       let arr = this.squares
       let index = Math.floor(Math.random() * arr.length)
       while ((arr[index] === 'X') || (arr[index] === 'O')) {
         index = Math.floor(Math.random() * arr.length)
-        console.log('Picked random index: ', index)
         if(this.winner || this.stepNumber > 8) {
           return
         }
       }
       this.$store.dispatch('clickedSquare', index)
       this.dispatchers()
-      console.log('filled index: ', index, 'with O')
     },
  
     dispatchers() {

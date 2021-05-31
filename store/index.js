@@ -71,7 +71,6 @@ export default createStore({
 
     setCurrentPlayer(state) {
       state.currentPlayer = state.currentPlayer === 'X' ? 'O' : 'X'
-      console.log('current player is: ', state.currentPlayer)
     },
 
     saveWinner(state, payload) {
