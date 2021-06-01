@@ -6,11 +6,11 @@
       </video>
       <Board />
 
-      <div class="game-info" v-if="winner || stepNumber > 9 || isStarted === false">
+      <div class="game-info" v-if="winner || stepNumber > 25 || isStarted === false">
         <div>
           <p v-if="winner">{{ winner === 'X' ? `You won!` : 'You lost' }}</p>
-          <p v-if="winner === null && stepNumber > 9">It's a draw!</p>
-          <button v-if="winner || stepNumber > 9" 
+          <p v-if="winner === null && stepNumber > 25">It's a draw!</p>
+          <button v-if="winner || stepNumber > 25" 
             @click="restart">Play again
           </button>
           <button v-if="isStarted === false && winner === null" 

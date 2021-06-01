@@ -36,8 +36,8 @@ export default {
   width: 55vmin;
   height: 55vmin;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   backdrop-filter: blur(10px);
   background-blend-mode: exclusion;
 }

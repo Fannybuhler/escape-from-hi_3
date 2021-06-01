@@ -46,22 +46,54 @@ export default {
     reverseIndex(index) {
       let reverseIndex = null
       if (index === 0) {
-        reverseIndex = 8
+        reverseIndex = 24
       } else if (index === 1) {
-        reverseIndex = 7
+        reverseIndex = 23
       } else if (index === 2) {
-        reverseIndex = 6
+        reverseIndex = 22
       } else if (index === 3) {
-        reverseIndex = 5
+        reverseIndex = 21
       } else if (index === 4) {
-        reverseIndex = 4
+        reverseIndex = 20
       } else if (index === 5) {
-        reverseIndex = 3
+        reverseIndex = 19
       } else if (index === 6) {
-        reverseIndex = 2
+        reverseIndex = 18
       } else if (index === 7) {
-        reverseIndex = 1
+        reverseIndex = 17
       } else if (index === 8) {
+        reverseIndex = 16
+      } else if (index === 9) {
+        reverseIndex = 15
+      } else if (index === 10) {
+        reverseIndex = 14
+      } else if (index === 11) {
+        reverseIndex = 13
+      } else if (index === 12) {
+        reverseIndex = 12
+      } else if (index === 13) {
+        reverseIndex = 11
+      } else if (index === 14) {
+        reverseIndex = 10
+      } else if (index === 15) {
+        reverseIndex = 9
+      } else if (index === 16) {
+        reverseIndex = 8
+      } else if (index === 17) {
+        reverseIndex = 7
+      } else if (index === 18) {
+        reverseIndex = 6
+      } else if (index === 19) {
+        reverseIndex = 5
+      } else if (index === 20) {
+        reverseIndex = 4
+      } else if (index === 21) {
+        reverseIndex = 3
+      } else if (index === 22) {
+        reverseIndex = 2
+      } else if (index === 23) {
+        reverseIndex = 1
+      } else if (index === 24) {
         reverseIndex = 0
       }
       return reverseIndex
@@ -73,7 +105,7 @@ export default {
       while ((arr[index] === 'X') || (arr[index] === 'O')) {
         index = Math.floor(Math.random() * arr.length)
         console.log('Picked random index: ', index)
-        if(this.winner || this.stepNumber > 8) {
+        if(this.winner || this.stepNumber > 25) {
           return
         }
       }
@@ -97,7 +129,7 @@ export default {
   background: #ffffff14;
   background-blend-mode: exclusion;
   border: 1px solid #0000008c;
-  font-size: 15vmin;
+  font-size: 10vmin;
   font-weight: bold;
   line-height: 34px;
   padding: 0;
