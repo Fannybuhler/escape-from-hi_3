@@ -27,14 +27,12 @@ export default {
   methods: {
     fillSquare() {
       if(this.isStarted && this.currentPlayer === 'X') {
-        const reverseIndex = this.reverseIndex(this.position)
+        let reverseIndex = this.reverseIndex(this.position)
         const squareValue = this.squares[reverseIndex]
-        console.log('squareValue: ', squareValue)
         
         if(this.winner) {
           return
         }
-
         if (squareValue === null) {
           this.$store.dispatch('clickedSquare', reverseIndex)
           this.dispatchers()
@@ -74,12 +72,14 @@ export default {
       let index = Math.floor(Math.random() * arr.length)
       while ((arr[index] === 'X') || (arr[index] === 'O')) {
         index = Math.floor(Math.random() * arr.length)
+        console.log('Picked random index: ', index)
         if(this.winner || this.stepNumber > 8) {
           return
         }
       }
       this.$store.dispatch('clickedSquare', index)
       this.dispatchers()
+      console.log('filled index: ', index, 'with O')
     },
  
     dispatchers() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="board" @click="rotateBoard">
+  <div class="board">
     <Square v-for="(square, position) in squares" :key="position"
       :position="position" :value="square"
     />
