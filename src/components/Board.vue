@@ -40,7 +40,6 @@ export default {
   grid-template-rows: repeat(3, 1fr);
   backdrop-filter: blur(10px);
   background-blend-mode: exclusion;
-  background-image: var(--noise-pattern);
 }
 
 /*

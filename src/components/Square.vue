@@ -111,30 +111,27 @@ export default {
 
 <style scoped>
 .square {
-  color: #F42FDA;
+  color: #000;
   background: #ffffff14;
   background-blend-mode: exclusion;
-  background-image: var(--noise-pattern);
-  border: 1px solid #fffc;
+  border: 1px solid #0000008c;
   font-size: 15vmin;
   font-weight: bold;
   line-height: 34px;
   padding: 0;
   text-align: center;
   box-shadow: inset 0 0 0 #0004;
-  /* text-shadow: -1px -1px 1px #CC0364, -1px 1px 1px #CC0364, 1px -1px 1px #CC0364, 1px 1px 1px #CC0364; */
+  text-shadow: 0 0 1px #33920e, 0 2px 5px #5dbf38;
   transition: all .25s ease;
   outline: none;
 }
-.square.winner {
-  background: #8885;
-}
+
 .square:not([disabled]):empty:hover,
 .square:not([disabled]):empty:focus {
-  box-shadow: inset 0 2px 25px #0006;
+  box-shadow: inset 0 2px 25px #000000ad;
   cursor: pointer;
 }
 .square:not([disabled]):empty:active {
-  box-shadow: inset 0 2px 50px #0008;
+  box-shadow: inset 0 2px 50px #000000ad;
 }
 </style>
