@@ -27,7 +27,7 @@ export default {
 
 <style scoped>
 .board {
-  border: 1rem solid #fff4;
+  border: 0.5rem solid #ffffff14;
   box-shadow: 2.5px 5px 25px #0004, 0 1px 6px #0006;
   border-radius: .5rem;
   width: 55vmin;
@@ -37,7 +37,6 @@ export default {
   grid-template-rows: repeat(3, 1fr);
   backdrop-filter: blur(10px);
   background-blend-mode: exclusion;
-  background-image: var(--noise-pattern);
 }
 
 .rotate {
