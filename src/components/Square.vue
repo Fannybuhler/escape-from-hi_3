@@ -49,40 +49,22 @@ export default {
       let reverseIndex = null
       if (index === 0) {
         reverseIndex = 8
-        console.log('recieved index: ', index)
-        console.log('reversed to: ', reverseIndex)
       } else if (index === 1) {
         reverseIndex = 7
-        console.log('recieved index: ', index)
-        console.log('reversed to: ', reverseIndex)
       } else if (index === 2) {
         reverseIndex = 6
-        console.log('recieved index: ', index)
-        console.log('reversed to: ', reverseIndex)
       } else if (index === 3) {
         reverseIndex = 5
-        console.log('recieved index: ', index)
-        console.log('reversed to: ', reverseIndex)
       } else if (index === 4) {
         reverseIndex = 4
-        console.log('recieved index: ', index)
-        console.log('reversed to: ', reverseIndex)
       } else if (index === 5) {
         reverseIndex = 3
-        console.log('recieved index: ', index)
-        console.log('reversed to: ', reverseIndex)
       } else if (index === 6) {
         reverseIndex = 2
-        console.log('recieved index: ', index)
-        console.log('reversed to: ', reverseIndex)
       } else if (index === 7) {
         reverseIndex = 1
-        console.log('recieved index: ', index)
-        console.log('reversed to: ', reverseIndex)
       } else if (index === 8) {
         reverseIndex = 0
-        console.log('recieved index: ', index)
-        console.log('reversed to: ', reverseIndex)
       }
       return reverseIndex
     },
