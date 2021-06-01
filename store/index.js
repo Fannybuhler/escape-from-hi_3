@@ -17,10 +17,6 @@ export default createStore({
   },
 
   actions: {
-    restart(context) {
-      context.commit('resetState')
-    },
-    
     clickedSquare ({ commit }, index) {
       commit('pushClickedSquare', index)
     },
@@ -32,7 +28,6 @@ export default createStore({
     increaseStepNumber(context) {
       context.commit('setStepNumber')
     },
-
 
     calculateWinner({ state, commit }) {
       const squares = state.squares
@@ -58,12 +53,6 @@ export default createStore({
   },
 
   mutations: {
-    resetState(state) {
-      state.squares = null
-      state.currentPlayer = 'X'
-      state.winner = null
-    },
-
     pushClickedSquare (state, index) {
       state.squares[index] = state.currentPlayer
       console.log(state.squares)
@@ -71,7 +60,6 @@ export default createStore({
 
     setCurrentPlayer(state) {
       state.currentPlayer = state.currentPlayer === 'X' ? 'O' : 'X'
-      console.log('current player is: ', state.currentPlayer)
     },
 
     saveWinner(state, payload) {
