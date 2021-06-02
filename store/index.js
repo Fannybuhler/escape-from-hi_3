@@ -7,6 +7,7 @@ export default createStore({
     currentPlayer: 'X',
     winner: null,
     stepNumber: 1,
+    coins: 0
   },
 
   getters: {
@@ -55,15 +56,19 @@ export default createStore({
           squares[a] === squares[e]) {
           commit('saveWinner', squares[a])
           commit('toggleIsStarted')
+          commit('increaseCoins')
         }
       }
-    }
+    },
+
+    // earnCoin(context) {
+    //   context.commit('increaseCoins')
+    // }
   },
 
   mutations: {
     pushClickedSquare (state, index) {
       state.squares[index] = state.currentPlayer
-      console.log(state.squares)
     },
 
     setCurrentPlayer(state) {
@@ -80,6 +85,10 @@ export default createStore({
 
     toggleIsStarted(state) {
       state.isStarted = !state.isStarted
+    },
+
+    increaseCoins(state) {
+      state.coins += 1
     }
   }
 })

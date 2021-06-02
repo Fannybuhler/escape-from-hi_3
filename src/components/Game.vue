@@ -5,9 +5,9 @@
         <source src="../assets/neon.mp4" type="video/mp4">
       </video>
       <Board />
-
       <div class="game-info" v-if="winner || stepNumber > 25 || isStarted === false">
         <div>
+          <p v-if="isStarted === false && winner === null">I'll bet you a coin you can't beat me!</p>
           <p v-if="winner">{{ winner === 'X' ? `You won!` : 'You lost' }}</p>
           <p v-if="winner === null && stepNumber > 25">It's a draw!</p>
           <button v-if="winner || stepNumber > 25" 
@@ -85,6 +85,7 @@ export default {
   color: #111;
 }
 .game-info p {
+  color: #ffffffa6;
   margin: 0;
   display: flex;
   justify-content: center;
@@ -102,7 +103,7 @@ export default {
   border-radius: 5px;
   background: transparent;
   text-shadow: 0 0 1px #CC0364, 0 2px 5px #CC0364;
-  color: #111;
+  color: #ffffffa6;
   cursor: pointer;
   outline: none;
   transition: all .25s ease;
@@ -125,5 +126,6 @@ video {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: -1;
 }
 </style>

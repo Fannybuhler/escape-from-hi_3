@@ -14,7 +14,8 @@ export default {
   name: 'Board',
   computed: {
     ...mapState([
-      'isStarted'
+      'isStarted',
+      'currentPlayer'
     ]),
 
     ...mapGetters({
@@ -47,15 +48,14 @@ export default {
   :class="{rotate : isStarted}"
 */ 
 /* .rotate {
-  animation-duration: 5s;
+  animation-duration: 0.5s;
   animation-name: spin;
-  animation-iteration-count: infinite;
 }
 
 @keyframes spin {
   100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
   }
 } */
 </style>
