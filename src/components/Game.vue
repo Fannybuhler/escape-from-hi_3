@@ -7,8 +7,8 @@
       <Board />
       <div class="game-info" v-if="winner || stepNumber > 25 || isStarted === false">
         <div>
-          <p v-if="isStarted === false && winner === null">I'll bet you a coin you can't beat me!</p>
-          <p v-if="winner">{{ winner === 'X' ? `You won!` : 'You lost' }}</p>
+          <p v-if="isStarted === false && winner === null">I'll bet you 100kr you can't beat me!</p>
+          <p v-if="winner">{{ winner === 'X' ? `You won 100kr!` : 'You lost' }}</p>
           <p v-if="winner === null && stepNumber > 25">It's a draw!</p>
           <button v-if="winner || stepNumber > 25" 
             @click="restart">Next level

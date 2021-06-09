@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="score-board">
-      <img class="coins" src="./assets/dollar.svg" alt="dollar sign">
+      <img class="coins" src="./assets/krone.svg" alt="dollar sign">
       <p class="coins__text">{{ coins }}</p>
     </div>
     <Game />

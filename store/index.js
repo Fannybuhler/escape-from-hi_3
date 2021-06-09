@@ -88,7 +88,7 @@ export default createStore({
     },
 
     increaseCoins(state) {
-      state.coins += 1
+      state.coins += 100
     }
   }
 })
