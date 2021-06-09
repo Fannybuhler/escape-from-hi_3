@@ -7,7 +7,7 @@ export default createStore({
     currentPlayer: 'X',
     winner: null,
     stepNumber: 1,
-    coins: 0
+    coins: 70
   },
 
   getters: {
